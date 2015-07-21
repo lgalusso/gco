@@ -54,16 +54,21 @@
 ?>
 <script>
 function atualiza_valor() {
-    var dc = document.getElementById('dc');
+   // var dc = document.getElementById('dc');
     var dc_valor = document.getElementById('dc_valor');
-    var valor_total = document.getElementById('valor_total');
+    var rest_to_pay = document.getElementById('rest_to_pay');
+
     var valor = document.getElementById('valor');
-    if(dc.value== '%2B') {
+
+    valor.value = <?=$row['valor']?> - parseFloat(dc_valor.value);
+    if(valor.value < 0){valor.value = 0;};
+
+    /*if(dc.value== '%2B') {
         valor.value = <?=$row['valor']?> %2B parseFloat(dc_valor.value);
     } else {
         valor.value = <?=$row['valor']?> - parseFloat(dc_valor.value);
-    }
-    valor_total.innerHTML = '<?=$LANG['general']['currency']?> '%2Bvalor.value;
+    }*/
+    rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bvalor.value;
 }
 </script>
   <br />
@@ -84,35 +89,48 @@ function atualiza_valor() {
         <b><?=$row['dentista']?></b>
       </td>
     </tr>
-    <tr align="left">
-      <td>
-        <?=$LANG['payment']['plot_value']?>:
-      </td>
-      <td>
-        <b><?=$LANG['general']['currency'].' '.money_form($row['valor'])?></b>
-      </td>
-    </tr>
+
 <?
     if($row['pago'] == 'Não') {
 ?>
     <tr align="left">
+        <td>
+            <?=$LANG['payment']['total_to_pay']?>:
+        </td>
+        <td>
+            <b><div id="valor_total"><?=$LANG['general']['currency']?> <?=money_form($row['valor'])?></div></b>
+            <!-- <input type="hidden" name="valor" id="valor" value="<?=$row['valor']?>"> -->
+        </td>
+    </tr>
+    <tr align="left">
       <td colspan="2">
+        <!--
         <input type="radio" id="dc_p" name="dcc" value="%2B" checked onclick="document.getElementById('dc').value=this.value; javascript:atualiza_valor();" /> <?=$LANG['payment']['increase']?>
         <input type="radio" id="dc_m" name="dcc" value="-" onclick="document.getElementById('dc').value=this.value; javascript:atualiza_valor();" /> <?=$LANG['payment']['decrease']?>
-        <input type="hidden" id="dc" name="dc" value="%2B" />
-        <input type="text" id="dc_valor" name="dc_valor" value="0" class="forms" size="8" onKeypress="return Ajusta_Valor(this, event);"
-        onblur="if(this.value=='') { this.value='0' }; javascript:atualiza_valor()" />
+        -->
+          <b><input type="hidden" id="dc" name="dc" value="%2B" /></b>
       </td>
     </tr>
     <tr align="left">
-      <td>
-        <?=$LANG['payment']['total_to_pay']?>:
-      </td>
-      <td>
-        <b><div id="valor_total"><?=$LANG['general']['currency']?> <?=money_form($row['valor'])?></div></b>
-        <input type="hidden" name="valor" id="valor" value="<?=$row['valor']?>">
-      </td>
+        <td>
+            <?=$LANG['payment']['plot_value']?>:
+        </td>
+        <td>
+            <input type="text" id="dc_valor" name="dc_valor" value="0" class="forms" size="8" onKeypress="return Ajusta_Valor(this, event);"
+                   onblur="if(this.value=='') { this.value='0' }; javascript:atualiza_valor()" />
+        </td>
     </tr>
+    <tr align="left">
+        <td>
+            Rest to pay:
+        </td>
+        <td>
+            <b><div id="rest_to_pay"><?=$LANG['general']['currency']?> <?=money_form($row['valor'])?></div></b>
+            <input type="hidden" name="valor" id="valor" value="<?=$row['valor']?>">
+        </td>
+    </tr>
+
+
 <?
     }
 ?>
