@@ -54,21 +54,18 @@
 ?>
 <script>
 function atualiza_valor() {
-   // var dc = document.getElementById('dc');
+
     var dc_valor = document.getElementById('dc_valor');
     var rest_to_pay = document.getElementById('rest_to_pay');
 
-    var valor = document.getElementById('valor');
+    var debit = document.getElementById('debit');
 
-    valor.value = <?=$row['valor']?> - parseFloat(dc_valor.value);
-    if(valor.value < 0){valor.value = 0;};
+    debit.value = <?=$row['debit']?> - parseFloat(dc_valor.value);
+    if(debit.value < 0){debit.value = 0;};
 
-    /*if(dc.value== '%2B') {
-        valor.value = <?=$row['valor']?> %2B parseFloat(dc_valor.value);
-    } else {
-        valor.value = <?=$row['valor']?> - parseFloat(dc_valor.value);
-    }*/
-    rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bvalor.value;
+    //%2Bvalor.value;
+
+    rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bdebit.value;
 }
 </script>
   <br />
@@ -99,16 +96,12 @@ function atualiza_valor() {
         </td>
         <td>
             <b><div id="valor_total"><?=$LANG['general']['currency']?> <?=money_form($row['valor'])?></div></b>
-            <!-- <input type="hidden" name="valor" id="valor" value="<?=$row['valor']?>"> -->
+            <input type="hidden" name="valor" id="valor" value="<?=$row['valor']?>">
         </td>
     </tr>
     <tr align="left">
       <td colspan="2">
-        <!--
-        <input type="radio" id="dc_p" name="dcc" value="%2B" checked onclick="document.getElementById('dc').value=this.value; javascript:atualiza_valor();" /> <?=$LANG['payment']['increase']?>
-        <input type="radio" id="dc_m" name="dcc" value="-" onclick="document.getElementById('dc').value=this.value; javascript:atualiza_valor();" /> <?=$LANG['payment']['decrease']?>
-        -->
-          <b><input type="hidden" id="dc" name="dc" value="%2B" /></b>
+
       </td>
     </tr>
     <tr align="left">
@@ -125,8 +118,8 @@ function atualiza_valor() {
             Rest to pay:
         </td>
         <td>
-            <b><div id="rest_to_pay"><?=$LANG['general']['currency']?> <?=money_form($row['valor'])?></div></b>
-            <input type="hidden" name="valor" id="valor" value="<?=$row['valor']?>">
+            <b><div id="rest_to_pay"><?=$LANG['general']['currency']?> <?=money_form($row['debit'])?></div></b>
+            <input type="hidden" name="debit" id="debit" value="<?=$row['debit']?>">
         </td>
     </tr>
 
