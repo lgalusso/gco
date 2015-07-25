@@ -52,30 +52,39 @@
 	$query = mysql_query("SELECT * FROM v_orcamento WHERE codigo_parcela = ".$_GET['parcela']) or die('Line 42: '.mysql_error());
 	$row = mysql_fetch_array($query);
 ?>
-<script>
-function atualiza_valor() {
+    <script>
+        function atualiza_valor() {
 
-    var dc_valor = document.getElementById('dc_valor');
-    var rest_to_pay = document.getElementById('rest_to_pay');
-    var debit = document.getElementById('debit');
-    var valor = document.getElementById('valor');
+            var dc_valor = document.getElementById('dc_valor');
+            var rest_to_pay = document.getElementById('rest_to_pay');
+            var debit = document.getElementById('debit');
+            var valor = document.getElementById('valor');
 
-    if((dc_valor == null) || (dc_valor.value == 0) ){
-        rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bvalor.value;
-    }else{
-        var temp = parseFloat(debit.value);
-        debit.value = parseFloat(debit.value) - parseFloat(dc_valor.value);
+            // Si el valor a pagar es nulo o cero, mostramos el total a pagar
+            if((dc_valor == null) || (dc_valor.value == 0) ){
+                rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bvalor.value;
+            }else{
+                // Si nos pagan mas de lo que deben, asignamos el valor que nos debian
+                var temp = parseFloat(debit.value);
 
-        if(debit.value < 0){
-            dc_valor.value = temp ;
-            debit.value = 0;
-        };
 
-        rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bdebit.value;
-    }
-}
-</script>
+                var temp1 = parseFloat(debit.value) - parseFloat(dc_valor.value);
+
+                if(temp1 < 0){
+                    dc_valor.value = temp ;
+                    temp1 = 0;
+                };
+
+                rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Btemp1;
+            }
+        }
+    </script>
   <br />
+
+<?
+// Si no existe la factura mostramos un mensaje
+if($row) {
+?>
   <table width="58%" border="0" cellpadding="0" cellspacing="0">
     <tr align="left">
       <td width="40%">
@@ -117,11 +126,13 @@ function atualiza_valor() {
         </td>
         <td>
             <input type="text" id="dc_valor" name="dc_valor" value="0" class="forms" size="8" onKeypress="return Ajusta_Valor(this, event);"
+                <?=(($row['pago'] == 'Sim' || $row['baixa'] == 'Sim' || $row['confirmado'] == 'Não')?'disabled':'')?>
                    onblur="if(this.value=='') { this.value='0' }; javascript:atualiza_valor()" />
         </td>
     </tr>
     <tr align="left">
         <td>
+            <!-- TODO: Reemplazar por LANG -->
             Rest to pay:
         </td>
         <td>
@@ -145,7 +156,24 @@ function atualiza_valor() {
 <?
     }
 ?>
-    <tr align="left">
+      <?
+      // Mostramos el total pago solo si no está cancelada, y está paga
+      if(($row['baixa'] == 'Não')&&($row['pago'] == 'Sim')) {
+          ?>
+          <tr align="left">
+              <td>
+                  <!-- TODO: Reemplazar por LANG -->
+                  Total pago:
+              </td>
+              <td>
+                  <b><div id="valor_total"><?=$LANG['general']['currency']?> <?=money_form($row['valor'])?></div></b>
+              </td>
+          </tr>
+      <?
+      }
+      ?>
+
+     <tr align="left">
       <td>
         <?=$LANG['payment']['date']?>:
       </td>
@@ -210,3 +238,22 @@ function atualiza_valor() {
     }
 ?>
   </table>
+<?
+}else{
+?>
+    <table>
+        <tr>
+            <td colspan="2" align="center">
+                                        <!-- TODO: Reemplazar por LANG -->
+                <b><font color="#CC0000">No existe la factura con código: <?=$_GET['parcela']?></font></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+<?
+}
+?>
