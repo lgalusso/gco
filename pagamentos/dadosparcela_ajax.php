@@ -57,15 +57,22 @@ function atualiza_valor() {
 
     var dc_valor = document.getElementById('dc_valor');
     var rest_to_pay = document.getElementById('rest_to_pay');
-
     var debit = document.getElementById('debit');
+    var valor = document.getElementById('valor');
 
-    debit.value = <?=$row['debit']?> - parseFloat(dc_valor.value);
-    if(debit.value < 0){debit.value = 0;};
+    if((dc_valor == null) || (dc_valor.value == 0) ){
+        rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bvalor.value;
+    }else{
+        var temp = parseFloat(debit.value);
+        debit.value = parseFloat(debit.value) - parseFloat(dc_valor.value);
 
-    //%2Bvalor.value;
+        if(debit.value < 0){
+            dc_valor.value = temp ;
+            debit.value = 0;
+        };
 
-    rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bdebit.value;
+        rest_to_pay.innerHTML = '<?=$LANG['general']['currency']?> '%2Bdebit.value;
+    }
 }
 </script>
   <br />
@@ -118,8 +125,19 @@ function atualiza_valor() {
             Rest to pay:
         </td>
         <td>
-            <b><div id="rest_to_pay"><?=$LANG['general']['currency']?> <?=money_form($row['debit'])?></div></b>
-            <input type="hidden" name="debit" id="debit" value="<?=$row['debit']?>">
+            <?
+            if($row['debit'] == '0') {
+            ?>
+                <b><div id="rest_to_pay"><?=$LANG['general']['currency']?> <?=money_form($row['valor'])?></div></b>
+                <input type="hidden" name="debit" id="debit" value="<?=$row['valor']?>">
+            <?
+            }else{
+            ?>
+                <b><div id="rest_to_pay"><?=$LANG['general']['currency']?> <?=money_form($row['debit'])?></div></b>
+                <input type="hidden" name="debit" id="debit" value="<?=$row['debit']?>">
+            <?
+            }
+            ?>
         </td>
     </tr>
 
