@@ -1,3 +1,8 @@
+ALTER TABLE `gerenciador`.`parcelas_orcamento` 
+ADD COLUMN `debit` FLOAT NULL COMMENT '' AFTER `datapgto`;
+
+DROP VIEW gerenciador.v_orcamento;
+
 CREATE VIEW v_orcamento AS ( SELECT tpo.codigo_orcamento AS codigo_orcamento, 
 									tor.parcelas AS parcelas, 
 									tor.confirmado AS confirmado, 

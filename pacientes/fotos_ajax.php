@@ -80,13 +80,21 @@
             <tr>
 <?
 	$i = 0;
-	$query = mysql_query("SELECT * FROM `fotospacientes` WHERE `codigo_paciente` = '".$_GET[codigo]."' ORDER BY `codigo`") or die(mysql_error());
+	$nomPaciente='';
+	// TODO 
+	// ir a buscar las imagenes a la carpeta
+	$query = mysql_query("SELECT * FROM `pacientes` WHERE `codigo` = '".$_GET[codigo]."'") or die(mysql_error());
 	while($row = mysql_fetch_array($query)) {
+		// Guardamos el nombre del paciente para pasarlo como POST
+		if($i == 0)	
+			$nomPaciente = $row['nome'];
+		
 		if($i % 2 === 0) {
 			echo '</tr><tr>';
 		}
 ?>
               <td width="50%" align="center" valign="top">
+              <!--   TODO reemplazar por nombre de la foto-->
                <img src="pacientes/verfoto.php?codigo=<?=$row['codigo']?>" border="0"><BR>
                <font size="1"><?=$row['legenda']?></font><br><br>
                <?=((verifica_nivel('pacientes', 'E'))?'<a href="pacientes/excluirfotos_ajax.php?codigo='.$_GET[codigo].'&codigo_foto='.$row[codigo].'" onclick="return confirmLink(this)" target="iframe_upload">'.$LANG['patients']['delete_photo'].'</a>':'')?>
@@ -119,6 +127,7 @@
               </td>
             </tr>
           </table>
+          <input type="hidden" name="nomPaciente" value="<?=$nomPaciente?>"/>
           </form>
           <br />
       </td>
