@@ -20,3 +20,6 @@ CREATE VIEW v_orcamento AS ( SELECT tpo.codigo_orcamento AS codigo_orcamento,
 							FROM parcelas_orcamento tpo INNER JOIN orcamento tor ON 
 							tpo.codigo_orcamento = tor.codigo INNER JOIN pacientes tp ON 
 							tor.codigo_paciente = tp.codigo JOIN dentistas td ON tor.codigo_dentista = td.codigo );
+							
+ALTER TABLE `gerenciador`.`fotospacientes` 
+CHANGE COLUMN `foto` `foto` VARCHAR(50) NOT NULL COMMENT '' ;
