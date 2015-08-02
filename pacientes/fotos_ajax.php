@@ -81,28 +81,52 @@
 <?
 	$i = 0;
 	$nomPaciente='';
-	// TODO 
-	// ir a buscar las imagenes a la carpeta
+
+	
+	
 	$query = mysql_query("SELECT * FROM `pacientes` WHERE `codigo` = '".$_GET[codigo]."'") or die(mysql_error());
-	while($row = mysql_fetch_array($query)) {
-		// Guardamos el nombre del paciente para pasarlo como POST
-		if($i == 0)	
-			$nomPaciente = $row['nome'];
-		
+	
+	
+	$row=mysql_fetch_row($query);
+	$nomPaciente = $row['1'];
+	
+	$directory="fotos/".$nomPaciente;
+	$dirint = dir($directory);
+	
+	
+	while (($archivo = $dirint->read()) !== false)
+	{
 		if($i % 2 === 0) {
 			echo '</tr><tr>';
 		}
+		
+		
+		
 ?>
-              <td width="50%" align="center" valign="top">
-              <!--   TODO reemplazar por nombre de la foto-->
-               <img src="pacientes/verfoto.php?codigo=<?=$row['codigo']?>" border="0"><BR>
-               <font size="1"><?=$row['legenda']?></font><br><br>
-               <?=((verifica_nivel('pacientes', 'E'))?'<a href="pacientes/excluirfotos_ajax.php?codigo='.$_GET[codigo].'&codigo_foto='.$row[codigo].'" onclick="return confirmLink(this)" target="iframe_upload">'.$LANG['patients']['delete_photo'].'</a>':'')?>
-              </td>
-<?
+            <td width="50%" align="center" valign="top">
+              
+       <?        
+        if (eregi("gif", $archivo) || eregi("jpg", $archivo) || eregi("png", $archivo)){
+            echo '<img src="pacientes/'.$directory."/".$archivo.'" height="166" width="222" border="0"><br>';
+            
+            $fotosquery = mysql_query("SELECT * FROM `fotospacientes` WHERE `codigo_paciente` = '".$_GET[codigo]."'  and `foto` = '".$archivo."' ") or die(mysql_error());
+            $rowfotos=mysql_fetch_row($fotosquery);
+            echo '<label>'.$rowfotos['3'].'</label><br>';
+       ?>            
+       <?=((verifica_nivel('pacientes', 'E'))?'<a href="pacientes/descargarfoto_p.php?codigo='.$_GET[codigo].'&paciente='.$nomPaciente.'&nom_foto='.$archivo.'" " target="iframe_upload">'.'Editar Foto'.'</a>':'')?> 
+            <br><br>
+       <?=((verifica_nivel('pacientes', 'E'))?'<a href="pacientes/excluirfotos_ajax.php?codigo='.$_GET[codigo].'&paciente='.$nomPaciente.'&nom_foto='.$archivo.'" onclick="return confirmLink(this)" target="iframe_upload">'.$LANG['patients']['delete_photo'].'</a>':'')?>
+            </td>
+     <?   
+        }            
+
 		$i++;
-	}
+	}	
+	
+	$dirint->close();	
+	
 ?>
+
            </tr>
         </table> 
         <br />
@@ -113,7 +137,7 @@
   		  <table width="310" border="0" align="center" cellpadding="0" cellspacing="0">
     		<tr align="center">
               <td width="70%"><?=$LANG['patients']['file']?> <br />
-                <input type="file" size="20" name="arquivo" id="arquivo" class="forms" <?=$disable?> />
+                <input type="file" multiple size="20" name="arquivo[]" id="arquivo" class="forms" <?=$disable?> />
               </td>
             </tr>
     		<tr align="center">

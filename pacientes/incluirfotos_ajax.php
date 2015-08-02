@@ -47,40 +47,57 @@
 		die($frase_log);
 	}
 	
-	$target_dir = "fotos/";
-	$target_file = $target_dir .$_POST['nomPaciente']."/".$_FILES["arquivo"]["name"];
-	$uploadOk = 1;
+	$target_dir = "fotos/".$_POST['nomPaciente']."/";
 	
-	if(!empty($_FILES['arquivo']['name'])) {
+	// Iteramos sobre el array de imagenes a subir
+	$total = sizeof($_FILES["arquivo"]["name"]); 
+	$i = 0;
+	
+	while($i < $total){
 		
-		$check = getimagesize($_FILES['arquivo']['name']);
-		if($check !== false) {			
-			$uploadOk = 1;
-		} else {
-			echo "<script language='javascript' type='text/javascript'>alert('El archivo elegido para cargar no es una imagen.')</script>";
-			error_log("El archivo elegido para cargar no es una imagen.", 3, "../log/errors.log");
-			$uploadOk = 0;
-		}
+		$target_file = $target_dir.$_FILES["arquivo"]["name"][$i];
+		$uploadOk = 1;
 		
-		// Check if file already exists
-		if (file_exists($target_file)) {			
-			$uploadOk = 0;
-			error_log("Ya existe el archivo de imagen a subir.", 3, "../log/errors.log");
-		}
+		if(!empty($_FILES['arquivo']['name'][$i])) {
 		
-		// Check if $uploadOk is set to 0 by an error
-		if ($uploadOk == 0) {
-			echo "<script language='javascript' type='text/javascript'>alert('Sorry, your file was not uploaded.')</script>";
-			error_log("Hubo un error al tratar de subir la imagen.", 3, "../log/errors.log");
-			// if everything is ok, try to upload file
-		} else {
-			if (move_uploaded_file($_FILES['arquivo']['name'], $target_file)) {
-				//echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			$check = getimagesize($_FILES['arquivo']['tmp_name'][$i]);
+			if($check !== false) {
+				$uploadOk = 1;
 			} else {
-				echo "<script language='javascript' type='text/javascript'>alert('Hubo un error al tratar de subir la imagen.')</script>";
-				error_log("Hubo un error al tratar de subir la imagen.", 3, "../log/errors.log");
+				echo "<script language='javascript' type='text/javascript'>alert('El archivo elegido para cargar no es una imagen.')</script>";
+				error_log("El archivo elegido para cargar no es una imagen.", 3, "../log/errors.log");
+				$uploadOk = 0;
 			}
+		
+			// Check if file already exists
+			if (file_exists($target_file)) {
+				$uploadOk = 0;
+				error_log("Ya existe el archivo de imagen a subir.", 3, "../log/errors.log");
+			}
+		
+			// Check if $uploadOk is set to 0 by an error
+			if ($uploadOk == 0) {
+				echo "<script language='javascript' type='text/javascript'>alert('Sorry, your file was not uploaded.')</script>";
+				error_log("Hubo un error al tratar de subir la imagen.", 3, "../log/errors.log");
+				// if everything is ok, try to upload file
+			} else {
+				//Verificamos que exista la carpeta destino
+				if ( ! is_dir($target_dir)) {
+					mkdir($target_dir);
+				}
+				if (move_uploaded_file($_FILES['arquivo']['tmp_name'][$i], $target_file)) {
+					$sql = "INSERT INTO `fotospacientes` (`codigo_paciente`, `foto`, `legenda`) VALUES ('".$_GET['codigo']."', '".$_FILES["arquivo"]["name"][$i]."', '".utf8_decode ( htmlspecialchars( utf8_encode($_POST['legenda']) , ENT_QUOTES | ENT_COMPAT, 'utf-8') )."')";
+					mysql_query($sql) or die(mysql_error());
+					//echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+				} else {
+					echo "<script language='javascript' type='text/javascript'>alert('Hubo un error al tratar de subir la imagen.')</script>";
+					error_log("Hubo un error al tratar de subir la imagen.", 3, "../log/errors.log");
+				}
+			}	
+		
 		}
+	$i++;
+	
 		//$codigo = next_autoindex('fotospacientes');
 		//$caminho = "fotos/".$_GET[codigo]."/".$codigo.".jpg";
 		//$foto = imagecreatefromall($_FILES['arquivo']['tmp_name'], $_FILES['arquivo']['name']);

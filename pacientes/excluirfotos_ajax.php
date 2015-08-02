@@ -45,8 +45,8 @@
 	if(!checklog()) {
 		die($frase_log);
 	}
-	$caminho = "fotos/".$_GET[codigo]."/".$_GET[codigo_foto].".jpg";
-	mysql_query("DELETE FROM `fotospacientes` WHERE `codigo` = '".$_GET[codigo_foto]."'") or die(mysql_error());
+	$caminho = "fotos/".$_GET[paciente]."/".$_GET[nom_foto];	
+	mysql_query("DELETE FROM `fotospacientes` WHERE `codigo_paciente` = '".$_GET[codigo]."' and `foto` = '".$_GET[nom_foto]."' ") or die(mysql_error());
 	unlink($caminho);
 ?>
 <script language="javascript" type="text/javascript">
