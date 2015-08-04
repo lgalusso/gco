@@ -45,6 +45,11 @@
 	if(!checklog()) {
 		die($frase_log);
 	}
+	
+	if(!verifica_nivel('info_paciente', 'L')) {
+		echo $LANG['general']['you_tried_to_access_a_restricted_area'];
+		die();
+	}
 	$acao = '&acao=editar';
 	$paciente = new TPacientes();
     $query = mysql_query("SELECT * FROM odontograma WHERE codigo_paciente = ".$_GET['codigo']) or die('Line 39: '.mysql_error());

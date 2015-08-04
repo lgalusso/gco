@@ -45,6 +45,10 @@
 	if(!checklog()) {
 		die($frase_log);
 	}
+	if(!verifica_nivel('info_paciente', 'L')) {
+		echo $LANG['general']['you_tried_to_access_a_restricted_area'];
+		die();
+	}
 	$strUpCase = "ALTERAÇÂO";
 	$strLoCase = encontra_valor('pacientes', 'codigo', $_GET[codigo], 'nome').' - '.$_GET['codigo'];
 	$acao = '&acao=editar';

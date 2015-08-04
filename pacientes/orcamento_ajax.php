@@ -110,12 +110,12 @@
 ?>
       <tr class="<?=$td_class?>">
           <td width="15%"><?=$LANG['patients']['budget']?> <?=$i+1?></td>
-          <td width="34%"><?=$dentista->RetornaDados('titulo').' '.$nome;?></td>
+          <td width="32%"><?=$dentista->RetornaDados('titulo').' '.$nome;?></td>
           <td width="13%"><?=converte_data($row[data], 2)?></td>
           <td width="14%" align="right"><?=$LANG['general']['currency'].' '.money_form($row[valortotal]-($row[valortotal]*($row[desconto]/100)))?></td>
           <td width="11%"><div align="center"><a href="javascript:Ajax('pacientes/orcamentofechar', 'conteudo', 'codigo=<?=$_GET[codigo]?>&indice_orc=<?=($i+1)?>&acao=editar&subacao=editar&codigo_orc=<?=$row[codigo]?>')"><img src="imagens/icones/editar.gif" border="0" alt="Editar" width="16" height="18" /></div></td>
 
-          <td width="14%">
+          <td width="16%">
               <div align="center">
                   <?
                   $rowPO = mysql_fetch_array(mysql_query("SELECT * FROM parcelas_orcamento WHERE codigo_orcamento = ".$row['codigo']));

@@ -45,6 +45,10 @@
 	if(!checklog()) {
 		die($frase_log);
 	}
+	if(!verifica_nivel('info_paciente', 'L')) {
+		echo $LANG['general']['you_tried_to_access_a_restricted_area'];
+		die();
+	}
 	$paciente = new TOrtodontia();
 	if(isset($_POST['Salvar'])) {
 		$paciente->LoadOrtodontia($_GET['codigo']);

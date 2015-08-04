@@ -440,7 +440,7 @@
             if(!checknivel('Dentista')) {
 ?>
     <td width="33%" align="center">
-      <a href="javascript:;" onclick="if(confirm('<?=$LANG['patients']['are_you_sure_you_want_to_cancel_this_budget']?>')) { javascript:Ajax('pacientes/orcamentofechar', 'conteudo', 'codigo=<?=$_GET[codigo]?>&indice_orc=<?=($i+1)?>&acao=editar&subacao=editar&codigo_orc=<?=$row[codigo]?>&confirm_baixa=baixa') }">Dar Baixar no Orçamento</a>
+      <a href="javascript:;" onclick="if(confirm('<?=$LANG['patients']['are_you_sure_you_want_to_cancel_this_budget']?>')) { javascript:Ajax('pacientes/orcamentofechar', 'conteudo', 'codigo=<?=$_GET[codigo]?>&indice_orc=<?=($i+1)?>&acao=editar&subacao=editar&codigo_orc=<?=$row[codigo]?>&confirm_baixa=baixa') }">Dar de baja presupuesto</a>
     </td>
 <?
             }

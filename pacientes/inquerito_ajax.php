@@ -45,6 +45,12 @@
 	if(!checklog()) {
 		die($frase_log);
 	}
+	
+	if(!verifica_nivel('info_paciente', 'L')) {
+		echo $LANG['general']['you_tried_to_access_a_restricted_area'];
+		die();
+	}
+	
 	$paciente = new TInquerito();
 	if(isset($_POST[Salvar])) {	
 		$paciente->LoadInquerito($_GET[codigo]);

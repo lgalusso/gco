@@ -496,8 +496,16 @@
         if($nivel == '') {
             $nivel = $_SESSION['nivel'];
         }
+        
+        if($area == 'info_paciente' && $nivel == 'Funcionario'){
+        	return false;
+        }elseif($area == 'info_paciente' && $nivel == 'Dentista'){
+        	return true;
+        }else{
+        	return($nivel == 'Administrador' || mysql_num_rows(mysql_query("SELECT * FROM permissoes WHERE nivel = '".$nivel."' AND area = '".$area."' AND permissao LIKE '%".$permissao."%'")) > 0);
+        }
 
-        return($nivel == 'Administrador' || mysql_num_rows(mysql_query("SELECT * FROM permissoes WHERE nivel = '".$nivel."' AND area = '".$area."' AND permissao LIKE '%".$permissao."%'")) > 0);
+        
     }
 
 ?>
