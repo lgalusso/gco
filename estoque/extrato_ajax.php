@@ -98,16 +98,20 @@
       <td width="4%">
       </td>
       <td width="60%"><?=$LANG['stock']['description']?> <br />
-        <input type="text" size="80" name="descricao" id="descricao" class="forms">
+        <input type="text" size="75" name="descricao" id="descricao" class="forms">
       </td>
       <td width="19%"><?=$LANG['stock']['quantity']?> <br />
         <input type="text" size="20" name="quantidade" id="quantidade" class="forms"">
       </td>
-      <td width="14%" align="right"> <br />
-        <input type="submit" name="Salvar" id="Salvar" value="<?=$LANG['stock']['save']?>" class="forms"> &nbsp;&nbsp;
+      
+      <td width="10%"> <br />
+        <input type="submit" name="Salvar" id="Salvar" value="<?=$LANG['stock']['save']?>" class="forms">
       </td>
       <td width="3%">
       </td>
+      
+     
+      
     </tr>
   </table>
   </form>

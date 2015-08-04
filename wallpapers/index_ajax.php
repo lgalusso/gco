@@ -61,6 +61,7 @@
 ?>
 <center><img src="imagens/wallpapers/<?=$papel[$rand]?>" border="0" width="753" height="230"></center>
 <script>document.getElementById('saudacao').innerHTML='<font size=\"1\"><?php
+	date_default_timezone_set("America/Montevideo");
   	if(date('H') >= 0 && date('H') < 12) {
   		echo $LANG['func']['good_morning'];
   	} elseif(date('H') >= 12 && date('H') < 18) {

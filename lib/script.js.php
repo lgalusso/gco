@@ -172,7 +172,7 @@ function formSender(f, campo) {
 
 function Ajax(url, campo, query) {
 	elem = campo;
-	document.getElementById(elem).innerHTML = "<font color='red'>Carregando...";
+	document.getElementById(elem).innerHTML = "<font color='red'>Cargando...";
 	if (window.XMLHttpRequest) {  
 		req = new XMLHttpRequest();  
 	} else if (window.ActiveXObject) {  
@@ -441,7 +441,7 @@ function NewWindow(myPage, myName, Width, Height, Scroll, Resizable) {
 }
 
 function displayQCalendar(m, y) {
-	document.getElementById('calendario').innerHTML = "<font color='red'>Carregando...";
+	document.getElementById('calendario').innerHTML = "<font color='red'>Cargando...";
 	if (window.XMLHttpRequest) {
 		req = new XMLHttpRequest();
 	} else if (window.ActiveXObject) {

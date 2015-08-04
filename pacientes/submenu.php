@@ -53,7 +53,7 @@
         $disable = 'disabled';
 	}
 ?>
-<table width="620" border="0" align="center" cellpadding="0" cellspacing="0">
+<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr style="background-image: url('pacientes/img/fundo_submenu_pacientes.jpg')">
     <td align="center" width="20%"><a href="javascript:Ajax('pacientes/incluir','conteudo','codigo=<?=$_GET[codigo].$acao?>')"><span class="link_submenu_pacientes"><?=$LANG['patients']['clinical_sheet']?></span></a></td>
     <td align="center" width="15%"><?=$odontograma.'<span class="link_submenu_pacientes">'.$LANG['patients']['odontogram']?></span></a></td>
@@ -65,7 +65,7 @@
     <td height="5"></td>
   </tr>
 </table>
-<table width="620" border="0" align="center" cellpadding="0" cellspacing="0">
+<table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr style="background-image: url('pacientes/img/fundo_submenu_pacientes.jpg')">
     <td align="center" width="20%"><?=$inquerito.'<span class="link_submenu_pacientes">'.$LANG['patients']['health_investigation']?></span></a></td>
     <td align="center" width="15%"><?=$ortodontia.'<span class="link_submenu_pacientes">'.$LANG['patients']['orthodonty']?></span></a></td>

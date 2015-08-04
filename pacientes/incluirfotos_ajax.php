@@ -71,14 +71,14 @@
 		
 			// Check if file already exists
 			if (file_exists($target_file)) {
-				$uploadOk = 0;
-				error_log("Ya existe el archivo de imagen a subir.", 3, "../log/errors.log");
+				$uploadOk = 0;				
+				echo "<script language='javascript' type='text/javascript'>alert('Ya existe el archivo de imagen a subir.')</script>";
 			}
 		
 			// Check if $uploadOk is set to 0 by an error
 			if ($uploadOk == 0) {
-				echo "<script language='javascript' type='text/javascript'>alert('Sorry, your file was not uploaded.')</script>";
-				error_log("Hubo un error al tratar de subir la imagen.", 3, "../log/errors.log");
+				echo "<script language='javascript' type='text/javascript'>alert('Hubo un error al tratar de subir la imagen.')</script>";
+				
 				// if everything is ok, try to upload file
 			} else {
 				//Verificamos que exista la carpeta destino
@@ -88,32 +88,15 @@
 				if (move_uploaded_file($_FILES['arquivo']['tmp_name'][$i], $target_file)) {
 					$sql = "INSERT INTO `fotospacientes` (`codigo_paciente`, `foto`, `legenda`) VALUES ('".$_GET['codigo']."', '".$_FILES["arquivo"]["name"][$i]."', '".utf8_decode ( htmlspecialchars( utf8_encode($_POST['legenda']) , ENT_QUOTES | ENT_COMPAT, 'utf-8') )."')";
 					mysql_query($sql) or die(mysql_error());
-					//echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+					
 				} else {
-					echo "<script language='javascript' type='text/javascript'>alert('Hubo un error al tratar de subir la imagen.')</script>";
-					error_log("Hubo un error al tratar de subir la imagen.", 3, "../log/errors.log");
+					echo "<script language='javascript' type='text/javascript'>alert('Hubo un error al tratar de subir la imagen.')</script>";					
 				}
 			}	
 		
 		}
 	$i++;
 	
-		//$codigo = next_autoindex('fotospacientes');
-		//$caminho = "fotos/".$_GET[codigo]."/".$codigo.".jpg";
-		//$foto = imagecreatefromall($_FILES['arquivo']['tmp_name'], $_FILES['arquivo']['name']);
-        //$ratio = imagesx($foto) / imagesy($foto);
-        //$siz_x = imagesx($foto);
-		//$siz_y = imagesy($foto);
-		//$imagem = imagecreatetruecolor($siz_x, $siz_y);
-		//$white = imagecolorallocate($imagem, 255, 255, 255);
-		/*if(!imagecopyresampled($imagem, $foto, 0, 0, 0, 0, $siz_x, $siz_y, imagesx($foto), imagesy($foto))) {
-			echo '<script>alert("Favor enviar apenas fotos com\ntamanho menor que 1MB!")</script>'; die();
-		}*/
-		//imagejpeg($imagem, 'teste.jpg');
-        //$img_data = addslashes(file_get_contents('teste.jpg'));
-        //$sql = "INSERT INTO `fotospacientes` (`codigo_paciente`, `foto`, `legenda`) VALUES ('".$_GET['codigo']."', '".$img_data."', '".utf8_decode ( htmlspecialchars( utf8_encode($_POST['legenda']) , ENT_QUOTES | ENT_COMPAT, 'utf-8') )."')";
-        //unlink('teste.jpg');
-        //mysql_query($sql) or die(mysql_error());
 	}
 ?>
 <script language="javascript" type="text/javascript">

@@ -50,7 +50,7 @@
     $LANG['func']['good_afternoon'] = 'Buenas Tardes';
     $LANG['func']['good_night'] = 'Buenas Noches';
     
-    $LANG['script']['are_you_sure_you_wat_to_delete_the_data'] = '¿Est'.$a.' seguro que quiere eliminar estos datos?';
+    $LANG['script']['are_you_sure_you_wat_to_delete_the_data'] = '¿Está seguro que quiere eliminar estos datos?';
     $LANG['script']['loading'] = 'Cargando...';
 	
 	$LANG['config']['configuration_wizard'] = 'Asistente de configuraci'.$o.'n';
@@ -119,7 +119,7 @@
 	$LANG['menu']['monetary'] = 'Financiero';
 	$LANG['menu']['updates'] = 'Actualizar';
 	$LANG['menu']['utilities'] = 'Utilitarios';
-	$LANG['menu']['configuration'] = 'Configuraciones';
+	$LANG['menu']['configuration'] = 'Configurar';
 	$LANG['menu']['help'] = 'Ayuda';
 	$LANG['menu']['logout'] = 'Salir';
 	$LANG['menu']['professionals'] = 'Profesionales';
@@ -358,7 +358,7 @@
 	$LANG['patients']['patients_facial_type'] = 'Tipo facial del paciente:';
 	$LANG['patients']['patients_dental_class'] = 'Clase dental del paciente:';
 	$LANG['patients']['cross_bite'] = 'Mordida cruzada:';
-	$LANG['patients']['spee_curve'] = 'Curva Spee::';
+	$LANG['patients']['spee_curve'] = 'Curva Spee:';
 	$LANG['patients']['overbite'] = 'Overbite:';
 	$LANG['patients']['overjet'] = 'Overjet:';
 	$LANG['patients']['midline'] = 'L'.$i.'nea media:';
@@ -392,7 +392,7 @@
 	$LANG['patients']['status_successfully_deleted'] = 'Estado eliminado exitosamente!';
 	$LANG['patients']['status_successfully_included'] = 'Estado agregado exitosamente!';
 	$LANG['patients']['radiograph'] = 'Radiograf'.$i.'a';
-	$LANG['patients']['panoramic'] = 'Panora'.$a.'ica';
+	$LANG['patients']['panoramic'] = 'Panor'.$a.'mica';
 	$LANG['patients']['occlusal'] = 'Oclusal';
 	$LANG['patients']['periapical'] = 'Periapical';
 	$LANG['patients']['interproximal'] = 'Interproximal';
@@ -414,7 +414,7 @@
 	$LANG['professionals']['include_new_professional'] = 'Agregar nuevo Profesional';
 	$LANG['professionals']['professional'] = 'Profesional';
 	$LANG['professionals']['telephone'] = 'Tel'.$e.'fono';
-	$LANG['professionals']['council'] = 'Consejo';
+	$LANG['professionals']['council'] = 'Nº Profesional';
 	$LANG['professionals']['edit_view'] = 'Editar/Ver';
 	$LANG['professionals']['delete'] = 'Eliminar';
 	$LANG['professionals']['total_professionals'] = 'Total de profesionales';
@@ -570,7 +570,7 @@
 	$LANG['calendar']['time'] = 'Hora';
 	$LANG['calendar']['patient'] = 'Paciente';
 	$LANG['calendar']['procedure'] = 'Procedimiento';
-	$LANG['calendar']['missed'] = 'Perdidas';
+	$LANG['calendar']['missed'] = 'Perdida';
 	$LANG['calendar']['comments_of_day'] = 'Observaciones del D'.$i.'a';
 	$LANG['calendar']['print_calendar'] = 'Imprimir Calendario';
 	
@@ -793,8 +793,8 @@
 	$LANG['payment']['parcial'] = 'Pago de Cuota';
 	$LANG['payment']['parcial_complete'] = 'Pago de Cuota Completo';
 	$LANG['payment']['plot_information'] = 'Informaci'.$o.'n de Cuota';
-	$LANG['payment']['pass_the_optic_reader_or'] = 'PASE EL LECTOR ÓPTICO O';
-	$LANG['payment']['type_the_bar_code'] = 'INGRESE EL CÓDIGO DE BARRAS';
+	$LANG['payment']['pass_the_optic_reader_or'] = 'PASE EL LECTOR '.$O.'PTICO O';
+	$LANG['payment']['type_the_bar_code'] = 'INGRESE EL C'.$O.'DIGO DE BARRAS';
 	$LANG['payment']['patient'] = 'Paciente';
 	$LANG['payment']['professional'] = 'Profesional';
 	$LANG['payment']['plot_value'] = 'Valor de la Cuota';
@@ -867,7 +867,7 @@
 	
 	$LANG['admin_password']['password_successfully_changed'] = 'Contrase'.$enie.'a cambiada correctamente!';
 	$LANG['admin_password']['change_admin_password'] = 'Cambiar contrase'.$enie.'a de administrador';
-	$LANG['admin_password']['personal_access_information'] = 'Acceso a Informaci'.$o.'n Personal';
+	$LANG['admin_password']['personal_access_information'] = 'Ingrese su usuario y contrase'.$enie.'a';
 	$LANG['admin_password']['current_password'] = 'Contrase'.$enie.'a Actual';
 	$LANG['admin_password']['new_password'] = 'Nueva Contrase'.$enie.'a';
 	$LANG['admin_password']['retype_new_password'] = 'Repita la nueva contrase'.$enie.'a';

@@ -98,10 +98,10 @@
       <td width="4%">
       </td>
       <td width="12%"><?=$LANG['cash_flow']['date']?> <br />
-        <input type="text" size="13" value="<?=converte_data(hoje(), 2)?>" name="data" id="data" class="forms" onKeypress="return Ajusta_Data(this, event);">
+        <input type="text" size="8" value="<?=converte_data(hoje(), 2)?>" name="data" id="data" class="forms" onKeypress="return Ajusta_Data(this, event);">
       </td>
       <td width="53%"><?=$LANG['cash_flow']['description']?> <br />
-        <input type="text" size="77" name="descricao" id="descricao" class="forms">
+        <input type="text" size="74" name="descricao" id="descricao" class="forms">
       </td>
       <td width="7%"><?=$LANG['cash_flow']['d_c']?> <br />
         <select name="dc" class="forms" id="dc">
@@ -118,7 +118,7 @@
 			 </select>
       </td>
       <td width="11%"><?=$LANG['cash_flow']['value']?> <br />
-        <input type="text" size="12" name="valor" id="valor" class="forms" onKeypress="return Ajusta_Valor(this, event);">
+        <input type="text" size="7" name="valor" id="valor" class="forms" onKeypress="return Ajusta_Valor(this, event);">
       </td>
       <td width="10%"> <br />
         <input type="submit" name="Salvar" id="Salvar" value="<?=$LANG['cash_flow']['save']?>" class="forms">
