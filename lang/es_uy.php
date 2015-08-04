@@ -164,7 +164,7 @@
 	$LANG['wallpaper']['login'] = 'Usuario';
 	$LANG['wallpaper']['password'] = 'Contrase'.$enie.'a';
 	$LANG['wallpaper']['btn_login'] = 'Entrar';
-	$LANG['wallpaper']['invalid_login'] = 'Usuario y/o contrase'.$enie.'a inv'.$a.'lidos!';
+	$LANG['wallpaper']['invalid_login'] = 'Usuario y/o contraseña inválidos!';
 	$LANG['wallpaper']['login_inactive'] = 'Cuenta de usuario inactiva en el sistema!';
 	
 	$LANG['patients']['manage_patients'] = 'Administrar pacientes';
@@ -295,7 +295,7 @@
 	$LANG['patients']['plots'] = 'Cuota';
 	$LANG['patients']['date'] = 'Fecha';
 	$LANG['patients']['status'] = 'Estado';
-	$LANG['patients']['bill_number'] = 'Factura nº';
+	$LANG['patients']['bill_number'] = 'Factura nro.';
 	$LANG['patients']['open'] = 'Abierta';
 	$LANG['patients']['paid'] = 'Paga';
 	$LANG['patients']['overdue'] = 'Atrasada';
