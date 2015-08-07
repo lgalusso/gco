@@ -539,7 +539,7 @@
             <td width="287"><?=$LANG['patients']['patient_status']?> <br />
               <label><select name="status" class="forms" <?=$disable?> id="status">
 <?
-	$valores = array('Avaliação' => $LANG['patients']['evaluation'], 'Em tratamento' => $LANG['patients']['in_treatment'], 'Em revisão' => $LANG['patients']['in_revision'], 'Concluído' => $LANG['patients']['closed']);
+	$valores = array('Evaluación' => $LANG['patients']['evaluation'], 'En tratamiento' => $LANG['patients']['in_treatment'], 'En revisión' => $LANG['patients']['in_revision'], 'Concluído' => $LANG['patients']['closed']);
 	foreach($valores as $chave => $valor) {
 		if($row[status] == $uf) {
 			echo '<option value="'.$chave.'" selected>'.$valor.'</option>';

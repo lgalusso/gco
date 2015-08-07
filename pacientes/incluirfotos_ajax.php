@@ -100,5 +100,5 @@
 	}
 ?>
 <script language="javascript" type="text/javascript">
-window.parent.location.href="javascript:Ajax('pacientes/fotos', 'conteudo', 'codigo=<?=$_GET[codigo]?>&acao=editar')";
+window.parent.location.href="javascript:Ajax('pacientes/fotos', 'conteudo', 'album=<?=$_POST['nomPaciente']?>&codigo=<?=$_GET[codigo]?>&acao=editar')";
 </script>

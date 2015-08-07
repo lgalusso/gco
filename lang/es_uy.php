@@ -276,7 +276,7 @@
 	$LANG['patients']['edit'] = 'Editar';
 	$LANG['patients']['confirmed'] = 'Confirmado';
 	$LANG['patients']['code'] = 'C'.$o.'digo';
-	$LANG['patients']['tooth'] = 'Diente';
+	$LANG['patients']['tooth'] = 'Pieza';
 	$LANG['patients']['procedure'] = 'Procedimiento';
 	$LANG['patients']['private'] = 'Particular';
 	$LANG['patients']['plan'] = 'Convenio/Plan';
@@ -374,7 +374,7 @@
 	$LANG['patients']['kind_of_graft_to_be_performed'] = 'Tipo de injerto que se realiza:';
 	$LANG['patients']['photos'] = 'Fotos';
 	$LANG['patients']['file'] = 'Archivo';
-	$LANG['patients']['legend'] = 'Legenda';
+	$LANG['patients']['legend'] = 'Leyenda';
 	$LANG['patients']['others'] = 'Otros';
 	$LANG['patients']['report_of_consultations_scheduled'] = 'Informe de consultas agendadas';
 	$LANG['patients']['print_recipe'] = 'Imprimir receta';
