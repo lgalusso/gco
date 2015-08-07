@@ -38,6 +38,15 @@
     *
     */
 	if($_GET[acao] == 'editar') {
+		
+		$nomPaciente='';
+		
+		$query = mysql_query("SELECT * FROM `pacientes` WHERE `codigo` = '".$_GET[codigo]."'") or die(mysql_error());
+		
+		
+		$row=mysql_fetch_row($query);
+		$nomPaciente = $row['1'];
+		
 		$odontograma = "<a href=\"javascript:Ajax('pacientes/odontograma','conteudo','codigo=".$_GET[codigo].$acao."')\">";
 		$orcamento = "<a href=\"javascript:Ajax('pacientes/orcamento','conteudo','codigo=".$_GET[codigo].$acao."')\">";
 		$objetivo = "<a href=\"javascript:Ajax('pacientes/objetivo','conteudo','codigo=".$_GET[codigo].$acao."')\">";
@@ -45,7 +54,7 @@
 		$inquerito = "<a href=\"javascript:Ajax('pacientes/inquerito','conteudo','codigo=".$_GET[codigo].$acao."')\">";
 		$ortodontia = "<a href=\"javascript:Ajax('pacientes/ortodontia','conteudo','codigo=".$_GET[codigo].$acao."')\">";
 		$implantodontia = "<a href=\"javascript:Ajax('pacientes/implantodontia','conteudo','codigo=".$_GET[codigo].$acao."')\">";
-		$fotos = "<a href=\"javascript:Ajax('pacientes/fotos','conteudo','codigo=".$_GET[codigo].$acao."')\">";
+		$fotos = "<a href=\"javascript:Ajax('pacientes/fotos','conteudo','album=".$nomPaciente."&codigo=".$_GET[codigo].$acao."')\">";
 		$outros = "<a href=\"javascript:Ajax('pacientes/outros','conteudo','codigo=".$_GET[codigo].$acao."')\">";
 		$radio = "<a href=\"javascript:Ajax('pacientes/radio','conteudo','codigo=".$_GET[codigo].$acao."')\">";
 	}

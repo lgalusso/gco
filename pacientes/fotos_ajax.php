@@ -53,6 +53,34 @@
 	$strLoCase = encontra_valor('pacientes', 'codigo', $_GET[codigo], 'nome').' - '.$_GET['codigo'];
 	$acao = '&acao=editar';
 ?>
+
+<link rel="stylesheet" type="text/css" href="pacientes/img/folio-gallery/folio-gallery.css" />
+<script type="text/javascript" src="pacientes/img/folio-gallery/js/jquery-1.9.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="pacientes/img/folio-gallery/colorbox/colorbox.css" />
+<!--<link rel="stylesheet" type="text/css" href="fancybox/fancybox.css" />-->
+<script type="text/javascript" src="pacientes/img/folio-gallery/colorbox/jquery.colorbox-min.js"></script>
+<!--<script type="text/javascript" src="fancybox/jquery.fancybox-1.3.1.min.js"></script>-->
+<script type="text/javascript">
+$(document).ready(function() {	
+	
+	// colorbox settings
+	$(".albumpix").colorbox({rel:'albumpix'});
+	
+	// fancy box settings
+	/*
+	$("a.albumpix").fancybox({
+		'autoScale	'		: true, 
+		'hideOnOverlayClick': true,
+		'hideOnContentClick': true
+	});
+	*/
+});
+</script>
+
+
+
+
 <link href="../css/smile.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
@@ -82,54 +110,21 @@
         <br />
           <table width="550" border="0" align="center">
             <tr>
-<?
-	$i = 0;
-	$nomPaciente='';
 
-	
-	
-	$query = mysql_query("SELECT * FROM `pacientes` WHERE `codigo` = '".$_GET[codigo]."'") or die(mysql_error());
-	
-	
-	$row=mysql_fetch_row($query);
-	$nomPaciente = $row['1'];
-	
-	$directory="fotos/".$nomPaciente;
-	$dirint = dir($directory);
-	
-	
-	while (($archivo = $dirint->read()) !== false)
-	{
-		if($i % 2 === 0) {
-			echo '</tr><tr>';
-		}
-		
-		
-		
-?>
-            <td width="50%" align="center" valign="top">
-              
-       <?        
-        if (eregi("gif", $archivo) || eregi("jpg", $archivo) || eregi("png", $archivo)){
-            echo '<img src="pacientes/'.$directory."/".$archivo.'" height="166" width="222" border="0"><br>';
-            
-            $fotosquery = mysql_query("SELECT * FROM `fotospacientes` WHERE `codigo_paciente` = '".$_GET[codigo]."'  and `foto` = '".$archivo."' ") or die(mysql_error());
-            $rowfotos=mysql_fetch_row($fotosquery);
-            echo '<label>'.$rowfotos['3'].'</label><br>';
-       ?>            
-       <?=((verifica_nivel('pacientes', 'E'))?'<a href="pacientes/descargarfoto_p.php?codigo='.$_GET[codigo].'&paciente='.$nomPaciente.'&nom_foto='.$archivo.'" " target="iframe_upload">'.'Editar Foto'.'</a>':'')?> 
-            <br><br>
-       <?=((verifica_nivel('pacientes', 'E'))?'<a href="pacientes/excluirfotos_ajax.php?codigo='.$_GET[codigo].'&paciente='.$nomPaciente.'&nom_foto='.$archivo.'" onclick="return confirmLink(this)" target="iframe_upload">'.$LANG['patients']['delete_photo'].'</a>':'')?>
-            </td>
-     <?   
-        }            
-
-		$i++;
-	}	
-	
-	$dirint->close();	
-	
-?>
+			<div>  
+			  <?php 
+			  $nomPaciente='';
+			  
+			  $query = mysql_query("SELECT * FROM `pacientes` WHERE `codigo` = '".$_GET[codigo]."'") or die(mysql_error());
+			  
+			  
+			  $row=mysql_fetch_row($query);
+			  $nomPaciente = $row['1'];
+			  
+			  include "img/folio-gallery/folio-gallery.php"; 
+			  
+			  ?>
+			</div>  
 
            </tr>
         </table> 
@@ -137,7 +132,7 @@
         </fieldset>
         <br />
         <iframe name="iframe_upload" width="1" height="1" frameborder="0" scrolling="No"></iframe>
-          <form id="form2" name="form2" method="POST" action="pacientes/incluirfotos_ajax.php?codigo=<?=$_GET['codigo']?>" enctype="multipart/form-data" target="iframe_upload"> <?/*onsubmit="Ajax('arquivos/daclinica/arquivos', 'conteudo', '');">*/?>
+          <form id="form2" name="form2" method="POST" action="pacientes/incluirfotos_ajax.php?album=<?= $nomPaciente?>&codigo=<?=$_GET['codigo']?>" enctype="multipart/form-data" target="iframe_upload"> <?/*onsubmit="Ajax('arquivos/daclinica/arquivos', 'conteudo', '');">*/?>
   		  <table width="310" border="0" align="center" cellpadding="0" cellspacing="0">
     		<tr align="center">
               <td width="70%"><?=$LANG['patients']['file']?> <br />
